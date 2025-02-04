@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Set global styles for the body */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: #0070f3;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Main container styling */
+main {
+  padding: 1rem;
+}
+
