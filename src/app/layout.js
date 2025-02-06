@@ -1,23 +1,3 @@
-// import Navbar from '../components/Navbar';
-
-
-
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body>
-//         <Navbar />
-//         <main>{children}</main>
-//       </body>
-//     </html>
-//   );
-// }
-
-
-// src/app/provider.js or _app.js (Client Component)\
-
-
 'use client';  // Ensure it's a Client Component
 
 import { Provider } from 'react-redux'; 
@@ -40,7 +20,7 @@ export default function RootLayout({ children }) {
     // Only dispatch on the client-side
     store.dispatch(setAuthStateFromStorage());
   }, []);
-  
+
   return (
     <html lang="en">
       <body>
