@@ -2,7 +2,6 @@
 'use client';
 
 import React from 'react';
-import AuthStatus from '../../components/AuthStatus';  // Adjusted import path
 
 export default function HomePage() {
   return (
@@ -10,7 +9,7 @@ export default function HomePage() {
       <h1>Welcome to the Home Page</h1>
       
       {/* Render the AuthStatus component */}
-      <AuthStatus />
+      {/* //<AuthStatus /> */}
     </div>
   );
 }
