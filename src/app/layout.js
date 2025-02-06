@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 //import store from '../store/store';  // Import the Redux store
 import store from '../store/store';  // Import the Redux store
 import { setAuthStateFromStorage } from '../store/authSlice';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar.jsx';
 import './globals.css';
 // export const metadata = {
 //   title: 'My Next.js App',
