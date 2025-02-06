@@ -61,7 +61,8 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Product Listings</h1>
+      <h1 className="text-4xl font-bold text-center text-gray-800 mt-20 mb-5">Product Listings</h1>
+
         {products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
