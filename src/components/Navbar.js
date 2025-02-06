@@ -1,32 +1,15 @@
 'use client';
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation'; // Import useRouter for navigation
+import { signOut } from '../store/authSlice';  // Import signOut action
 
 export default function Navbar() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const router = useRouter();  // Get the Next.js router instance
-
-  useEffect(() => {
-    // Function to check if user is authenticated
-    const checkAuthentication = () => {
-      const authToken = localStorage.getItem('auth_token');
-      const client = localStorage.getItem('client');
-      const expiry = localStorage.getItem('expiry');
-      const uid = localStorage.getItem('uid');
-      const bearer = localStorage.getItem('bearer');
+  const dispatch = useDispatch();
+  const router = useRouter();
   
-      if (authToken && client && expiry && uid && bearer) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
-    };
-    
-    // Check authentication when the component mounts or whenever pathname changes
-    checkAuthentication();
-
-  }, [router.pathname]);  // Depend on pathname to trigger check when the route changes
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);  // Use Redux to check authentication
 
   const handleSignOut = () => {
     // Remove auth data from localStorage when the user signs out
@@ -36,11 +19,11 @@ export default function Navbar() {
     localStorage.removeItem('uid');
     localStorage.removeItem('bearer');
 
-    // Update state to reflect that the user is logged out
-    setIsAuthenticated(false);
+    // Dispatch signOut action to update Redux state
+    dispatch(signOut());
 
-    // Use router.push to navigate without refreshing the page
-    router.push('/signin'); // This will navigate without reloading the page
+    // Navigate to sign-in page without reloading the page
+    router.push('/signin');
   };
 
   return (
@@ -77,3 +60,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

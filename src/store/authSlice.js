@@ -28,8 +28,18 @@ const authSlice = createSlice({
     // Action to set the authentication state from localStorage
     setAuthStateFromStorage: (state) => {
       if (typeof window !== 'undefined') {
+        // const authToken = localStorage.getItem('auth_token');
+        // state.isAuthenticated = !!authToken; // If token exists, set authenticated to true
+
         const authToken = localStorage.getItem('auth_token');
-        state.isAuthenticated = !!authToken; // If token exists, set authenticated to true
+        const client = localStorage.getItem('client');
+        const expiry = localStorage.getItem('expiry');
+        const uid = localStorage.getItem('uid');
+        const bearer = localStorage.getItem('bearer');
+        
+        // If all required data exists, mark as authenticated
+        state.isAuthenticated = authToken && client && expiry && uid && bearer ? true : false;
+
       }
     },
   },
