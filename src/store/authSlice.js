@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Get the initial authentication state from localStorage, if available
+// Set the initial state for authentication
 const initialState = {
-  isAuthenticated: !!localStorage.getItem('auth_token'), // Check if there's a token in localStorage
+  isAuthenticated: false, // Default to not authenticated
 };
 
+// Create a slice to manage authentication state
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -14,17 +15,29 @@ const authSlice = createSlice({
     },
     signOut: (state) => {
       state.isAuthenticated = false;
-      
-      // Clear all relevant items from localStorage
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('client');
-      localStorage.removeItem('expiry');
-      localStorage.removeItem('uid');
-      localStorage.removeItem('bearer');
+
+      // Clear all relevant items from localStorage (only on client-side)
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('client');
+        localStorage.removeItem('expiry');
+        localStorage.removeItem('uid');
+        localStorage.removeItem('bearer');
+      }
+    },
+    // Action to set the authentication state from localStorage
+    setAuthStateFromStorage: (state) => {
+      if (typeof window !== 'undefined') {
+        const authToken = localStorage.getItem('auth_token');
+        state.isAuthenticated = !!authToken; // If token exists, set authenticated to true
+      }
     },
   },
 });
 
-export const { signIn, signOut } = authSlice.actions;
+// Export actions for use in components
+export const { signIn, signOut, setAuthStateFromStorage } = authSlice.actions;
 
+// Export the reducer to use in the store configuration
 export default authSlice.reducer;
+
