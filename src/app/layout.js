@@ -23,6 +23,9 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        <script src="http://localhost:8097"></script>
+      </head>
       <body>
         <Provider store={store}>  {/* Wrap the components that use Redux */}
           <Navbar />  {/* Only the components that need Redux hooks */}
