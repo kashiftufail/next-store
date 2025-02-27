@@ -51,3 +51,57 @@ export const { signIn, signOut, setAuthStateFromStorage } = authSlice.actions;
 // Export the reducer to use in the store configuration
 export default authSlice.reducer;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { createSlice } from '@reduxjs/toolkit';
+
+// const initialState = {
+//   isAuthenticated: false, // Default to not authenticated
+// };
+
+// const authSlice = createSlice({
+//   name: 'auth',
+//   initialState,
+//   reducers: {
+//     signIn: (state) => {
+//       state.isAuthenticated = true;
+//     },
+//     signOut: (state) => {
+//       state.isAuthenticated = false;
+//       // Clear relevant items from localStorage when signing out
+//       if (typeof window !== 'undefined') {
+//         localStorage.removeItem('auth_token');
+//         localStorage.removeItem('client');
+//         localStorage.removeItem('expiry');
+//         localStorage.removeItem('uid');
+//         localStorage.removeItem('bearer');
+//       }
+//     },
+//     setAuthStateFromStorage: (state, action) => {
+//       // Set authentication state based on data from localStorage
+//       state.isAuthenticated = action.payload;
+//     },
+//   },
+// });
+
+// export const { signIn, signOut, setAuthStateFromStorage } = authSlice.actions;
+
+// export default authSlice.reducer;
+
