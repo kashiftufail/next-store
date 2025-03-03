@@ -11,10 +11,14 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  
+
   // Get authentication status from Redux store
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const cartItemCount = 1;  // Adjust this based on actual cart data
+
+  // Get cartItems from Redux store and calculate total quantity
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0); // Calculate total quantity
 
   const handleSignOut = () => {
     // Dispatch signOut action to update Redux state
@@ -80,21 +84,20 @@ export default function Navbar() {
 
                 {/* Sign out or sign in */}
                 {isAuthenticated ? (
-                    <button onClick={handleSignOut} className="text-red-500 hover:text-red-700 w-full text-left">
-                      Sign Out
-                    </button>
-                  ) : (
-                    <div className="space-y-2">
-                      <Link href="/signin" className="text-blue-500 hover:text-blue-700 w-full text-left">
-                        Sign In
-                      </Link>
-                      <br></br>
-                      <Link href="/signup" className="text-blue-500 hover:text-blue-700 w-full text-left">
-                        Sign Up
-                      </Link>
-                    </div>
-                  )}
-
+                  <button onClick={handleSignOut} className="text-red-500 hover:text-red-700 w-full text-left">
+                    Sign Out
+                  </button>
+                ) : (
+                  <div className="space-y-2">
+                    <Link href="/signin" className="text-blue-500 hover:text-blue-700 w-full text-left">
+                      Sign In
+                    </Link>
+                    <br />
+                    <Link href="/signup" className="text-blue-500 hover:text-blue-700 w-full text-left">
+                      Sign Up
+                    </Link>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -103,4 +106,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
