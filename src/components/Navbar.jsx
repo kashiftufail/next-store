@@ -1,3 +1,4 @@
+// src/components/Navbar.jsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -17,11 +18,9 @@ export default function Navbar() {
 
   // Get cartItems from Redux store and calculate total quantity
   const cartItems = useSelector((state) => state.cart.cartItems);
-
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0); // Calculate total quantity
 
   const handleSignOut = () => {
-    // Dispatch signOut action to update Redux state
     dispatch(signOut());
     router.push('/signin');
   };
@@ -58,18 +57,14 @@ export default function Navbar() {
             {/* Dropdown Menu */}
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-48 p-4 space-y-2 border border-gray-200">
-                {/* Username if authenticated */}
                 {isAuthenticated ? (
                   <p className="font-semibold text-gray-800">
-                    John Doe  {/* Replace with actual user name */}
+                    John Doe
                   </p>
                 ) : (
-                  <p className="text-gray-600">
-                    Not signed in
-                  </p>
+                  <p className="text-gray-600">Not signed in</p>
                 )}
 
-                {/* Links to favorite and cart (only if authenticated) */}
                 {isAuthenticated && (
                   <Link href="/products/favorites" className="flex items-center space-x-2 text-gray-700 hover:text-blue-500">
                     <FiHeart size={18} />
@@ -82,7 +77,6 @@ export default function Navbar() {
                   <span>Shopping Cart</span>
                 </Link>
 
-                {/* Sign out or sign in */}
                 {isAuthenticated ? (
                   <button onClick={handleSignOut} className="text-red-500 hover:text-red-700 w-full text-left">
                     Sign Out
