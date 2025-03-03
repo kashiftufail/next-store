@@ -1,19 +1,19 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ImageGalleryModal from '../../components/ImageGalleryModal'; // Import the modal component
+import ImageGalleryModal from '../../components/ImageGalleryModal';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [selectedProduct, setSelectedProduct] = useState(null); // To track the selected product for the modal
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [selectedProduct, setSelectedProduct] = useState(null); // Selected product for modal
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal open state
 
-  const resetQuantity = () => {
-    setSelectedProduct((prevProduct) => ({
-      ...prevProduct,
-      quantity: 1, // Reset to 1 when opening the modal
-    }));
+  const resetProductQuantity = (product) => {
+    setSelectedProduct({
+      ...product,
+      quantity: 1, // Reset quantity to 1 every time a new product is selected
+    });
   };
 
   useEffect(() => {
@@ -54,17 +54,12 @@ export default function ProductsPage() {
   }, []);
 
   const handleModalOpen = (product) => {
-    setSelectedProduct(product); // Set the selected product
-    resetQuantity(); // Reset the quantity to 1 whenever the modal opens
+    resetProductQuantity(product); // Reset the quantity to 1 before opening the modal
     setIsModalOpen(true); // Open modal
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false); // Close modal
-  };
-
-  const handleAddToCart = (product) => {
-    console.log('Add product to cart:', product);
   };
 
   if (error) {
@@ -110,7 +105,7 @@ export default function ProductsPage() {
           isOpen={isModalOpen}
           onClose={handleModalClose}
           product={selectedProduct}
-          setProduct={setProducts} // To update the products list after changing the default image
+          setProduct={setProducts} // Update the products list after changing the default image
         />
       )}
     </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 
@@ -6,6 +6,12 @@ const ImageGalleryModal = ({ isOpen, onClose, product, setProduct }) => {
   const [selectedImageId, setSelectedImageId] = useState(null);
   const [quantity, setQuantity] = useState(1); // Set default quantity to 1
   const dispatch = useDispatch(); // To dispatch actions to Redux store
+
+  useEffect(() => {
+    if (isOpen) {
+      setQuantity(1); // Reset quantity to 1 whenever the modal is opened
+    }
+  }, [isOpen]); // Effect runs when the modal is opened or closed
 
   const handleImageSelection = (imageId) => {
     setSelectedImageId(imageId);
@@ -34,12 +40,12 @@ const ImageGalleryModal = ({ isOpen, onClose, product, setProduct }) => {
   };
 
   const increaseQuantity = () => {
-    setQuantity(prev => prev + 1);
+    setQuantity((prev) => prev + 1);
   };
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(prev => prev - 1);
+      setQuantity((prev) => prev - 1);
     }
   };
 
